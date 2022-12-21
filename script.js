@@ -7,6 +7,7 @@ var lowerCase ="abcdefghijklmnopqrstuvwxyz".split('');
 var numbers = "123456789".split('');
 var symbols= "!@#$%^&*()_+".split('');
 
+//To render in the browser - convert the unicode
 var emojiStringToArray = function (str) {
   split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
   arr = [];
@@ -18,44 +19,48 @@ var emojiStringToArray = function (str) {
   }
   return arr;
 };
+
+//assign function to emoji variable
 emojis = emojiStringToArray("😴😄😃⛔🎠🚓🚇");
 
 function writePassword() {
   // variables to hold password values
-  var preReady = [];
-  var postReady = "";
-  // this var will hold the desired length
+  var almostReady = [];
+  var nowReady = "";
+  // this var will hold the desired password length
   var length = prompt("How long would you like your password to be?\n8-128");
   if(length < 8 || length > 128) {
     alert("Your password must be between 8-128 characters")
     writePassword()
   } else {
-    // if length is good, ask user what they would like included in password
+    // if length is good, ask user what they would like included in password, confirm statements below
     if(confirm("Would you like uppercase letters in your password?")) {
-      preReady = preReady.concat(upperCase);
+      almostReady = almostReady.concat(upperCase);
     }
     if(confirm("Would you like lowercase letters in your password?")){
-      preReady = preReady.concat(lowerCase);
+      almostReady = almostReady.concat(lowerCase);
     }
     if(confirm("Would you like numbers in your password?")){
-      preReady = preReady.concat(numbers);
+      almostReady = almostReady.concat(numbers);
     }
     if(confirm("Would you like symbols to be in your password?")){
-      preReady = preReady.concat(symbols);
+      almostReady = almostReady.concat(symbols);
     }
     if(confirm("Would you like emojis like '😴😄😃⛔🎠🚓🚇' to be in your password?")){
-      preReady = preReady.concat(emojis);
+      almostReady = almostReady.concat(emojis);
     }
-    if(preReady.length === 0) {
+    if(almostReady.length === 0) {
       alert("You must have at least one character type in your password");
       writePassword()
+      //randomize the outcome here
     } else {
       for (var i = 0; i < length; i++) {
-        var random = Math.floor(Math.random() * preReady.length);
-        postReady += preReady[random]
+        var random = Math.floor(Math.random() * almostReady.length);
+        nowReady += almostReady[random]
       }
     }
-    document.getElementById("password").innerHTML = postReady
+    //Pass the password into the element's text area
+    document.getElementById("password").innerHTML = nowReady
   }
 }
 
