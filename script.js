@@ -6,9 +6,19 @@ var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 var lowerCase ="abcdefghijklmnopqrstuvwxyz".split('');
 var numbers = "123456789".split('');
 var symbols= "!@#$%^&*()_+".split('');
-var emojis = "©®℗№⁜⌂◓◪∞⊗②⑥⫷".split('');
 
-
+var emojiStringToArray = function (str) {
+  split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
+  arr = [];
+  for (var i=0; i<split.length; i++) {
+    char = split[i]
+    if (char !== "") {
+      arr.push(char);
+    }
+  }
+  return arr;
+};
+emojis = emojiStringToArray("😴😄😃⛔🎠🚓🚇");
 
 function writePassword() {
   // variables to hold password values
@@ -33,7 +43,7 @@ function writePassword() {
     if(confirm("Would you like symbols to be in your password?")){
       preReady = preReady.concat(symbols);
     }
-    if(confirm("Would you like emojis like '©®℗№⁜⌂◓◪∞⊗②⑥⫷' to be in your password?")){
+    if(confirm("Would you like emojis like '😴😄😃⛔🎠🚓🚇' to be in your password?")){
       preReady = preReady.concat(emojis);
     }
     if(preReady.length === 0) {
