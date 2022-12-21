@@ -6,6 +6,9 @@ var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 var lowerCase ="abcdefghijklmnopqrstuvwxyz".split('');
 var numbers = "123456789".split('');
 var symbols= "!@#$%^&*()_+".split('');
+var emojis = "©®℗№⁜⌂◓◪∞⊗②⑥⫷".split('');
+
+
 
 function writePassword() {
   // variables to hold password values
@@ -29,6 +32,9 @@ function writePassword() {
     }
     if(confirm("Would you like symbols to be in your password?")){
       preReady = preReady.concat(symbols);
+    }
+    if(confirm("Would you like emojis like '©®℗№⁜⌂◓◪∞⊗②⑥⫷' to be in your password?")){
+      preReady = preReady.concat(emojis);
     }
     if(preReady.length === 0) {
       alert("You must have at least one character type in your password");
